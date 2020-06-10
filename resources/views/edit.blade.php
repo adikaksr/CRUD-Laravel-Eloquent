@@ -1,67 +1,50 @@
 @extends('main')
-@section('judul', 'CRUD | Edit')
+@section('judul', 'CRUD | Beranda')
 @section('konten')
-    <h3>Edit Data Mahasiswa</h3>    
-        <form action="/edit/id={{$mahasiswa->id}}" method="post" class="p-5">    
-        @csrf    
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nama</label>
-                <div class="col-sm-10">
-                    <input type="input" class="form-control" name="nama" value="{{$mahasiswa->nama}}" autocomplete="off">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">NIM</label>
-                <div class="col-sm-10">
-                    <input type="input" class="form-control" name="nim" value="{{$mahasiswa->nim}}" autocomplete="off">
-                </div>
-            </div>            
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Jenis Kelamin</label>   
-                <div class="col-sm-10">         
-                    <div class="form-check form-check-inline">       
-                        @if($mahasiswa->jenis_kelamin == 'Laki-laki')                 
-                        <input class="form-check-input" type="radio" name="jk" id="inlineRadio1" value="1" checked>
-                        @else
-                        <input class="form-check-input" type="radio" name="jk" id="inlineRadio1" value="1">
-                        @endif
-                        <label class="form-check-label" for="inlineRadio1">Laki-laki</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        @if($mahasiswa->jenis_kelamin == 'Perempuan')                 
-                        <input class="form-check-input"  type="radio" name="jk" id="inlineRadio2" value="2" checked>
-                        @else
-                        <input class="form-check-input" type="radio" name="jk" id="inlineRadio2" value="2">
-                        @endif
-                        <label class="form-check-label" for="inlineRadio2">Perempuan</label>
-                    </div>
-                </div>
-            </div>                           
-            <div class="form-group row dropdown mb-0">                          
-                <label class="col-sm-2 col-form-label">dosen</label>                         
-                <div class="col-sm-10">                
-                    @if($mahasiswa->dosen->id)
-                    <a role="button" id="namadosen" class="custom-select col-md-6 text-dark" onclick="drop('selectdosen')">{{ $mahasiswa->dosen->nama }}</a>                                                               
-                    @endif                
-                </div>
-            </div>
-            <div class="form-group row">                
-                <div id="selectdosen" class="dropdown-content col-md-5">                        
-                    <select class="custom-select plaintext col" name="select" size="5">                            
-                        <option class="dosen">--Pilih dosen--</option>
-                        @foreach($dosen as $list)
-                            @if($list->id == $mahasiswa->dosen_id)
-                                <option selected class="dosen" value="{{ $list->nama }}">{{ $list->nama }}</option> 
-                            @else
-                            <option class="dosen" value="{{ $list->nama }}">{{ $list->nama }}</option> 
-                            @endif
-                        @endforeach 
-                    </select>
-                </div> 
-            </div>    
-            <div class="form-group row">                                           
-                <input type="submit" name="Submit" class="btn btn-dark" value="Edit Data"></input>            
-            </div>
-        </form>
-    </div>  
-    @endsection
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>DATA MAHASISWA</h4>
+        </div>
+            <div class="card-body">
+
+                <div class="myBtn">
+                <div class="text right">
+    <a href="/tambah" class="btn btn-success" style="width:170px;">Tambah Mahasiswa</a>
+</div>           
+</div>    
+@if($message = Session::get('message'))
+    <h1 class="text-center">{{$message}}</h1>
+@else
+<table class="table table-hover table-dark table-bordered mt-3">
+            <thead>
+                <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Nim</th>
+                <th class="text-center" scope="col">Jenis Kelamin</th>
+                <th class="text-center" scope="col">Dosen Wali</th>
+                <th class="text-center" scope="col">Actions</th>
+                </tr>
+            </thead>
+    <?php $i=1;?>    
+    @foreach($mahasiswa as $mhs)          
+    <tr >
+        <td class="cntr"><?php echo $i;?></td>
+        <td >{{$mhs->nama}}</td>
+        <td class="cntr">{{$mhs->nim}}</td>        
+        <td >{{$mhs->jenis_kelamin}}</td>
+        <td >{{$mhs->dosen->nama}}</td>
+        <td class="text-center">
+        <a href="/edit/id={{$mhs->id}}" class="btn btn-primary badge-pill" style="width:80px;">Edit </a>
+        <a href="/hapus/id={{$mhs->id}}" class="btn btn-danger badge-pill" style="width:80px;">Hapus </a>
+        </td>
+    </tr>   
+        <?php ++$i;?>  
+        </div>
+</div>
+</div>       
+    @endforeach
+@endif
+
+@endsection
