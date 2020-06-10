@@ -10,17 +10,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    
     <link rel="stylesheet" href="/style.css">
     <title>@yield('judul')</title>
-  </head>
-  <body class="bg-secondary">      
+    <style>
+    body{
+        background-color: lightblue;
 
-    <h2 class="text-center bg-dark text-white mx-auto m-0 p-5">CRUD IN LARAVEL</h2>                            
-    <div class="row mx-auto justify-content-between p-3">
-        <div class="col-2">          
-          <a class="btn btn-block btn-dark" href="/">HOME</a> 
+    }
+    </style>
+  </head>
+  <body>      
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span class="font-weight-bold">LARAVEL CRUD</span>
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">HOME</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+        <div>          
+          <a class="btn btn-block btn-dark" href="/">-</a> 
         </div>               
     </div>      
 
-    <div class="main text-white">       
+    <div class="main text-black">       
         @yield('konten')                      
     </div>   
       
