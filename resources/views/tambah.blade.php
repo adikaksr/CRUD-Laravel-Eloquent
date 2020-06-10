@@ -1,7 +1,11 @@
 @extends('main')
 @section('judul', 'CRUD | Tambahkan')
 @section('konten')
-    <h3>Masukkan Data Anggota</h3>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3>Masukkan Data Mahasiswa</h3>
+        </div>
         <form action="/tambah/proses" method="post" class="p-5">
         {{ csrf_field() }}
             <div class="form-group row">
@@ -47,5 +51,7 @@
                 <input type="submit" name="Submit" class="btn btn-dark" value="Tambah Data"></input>
             </div>
         </form>
-    </div>  
+    </div>
+    </div> 
+</div> 
 @endsection
