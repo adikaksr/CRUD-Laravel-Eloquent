@@ -1,43 +1,49 @@
 @extends('main')
 @section('judul', 'CRUD | Beranda')
 @section('konten')
-<div class="myBtn">                       
-    <a href="/tambah" class="btn btn-dark">
-        Tambahkan Mahasiswa
-    </a>               
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h4>DATA MAHASISWA</h4>
+        </div>
+            <div class="card-body">
+
+                <div class="myBtn">
+                <div class="text right">
+    <a href="/tambah" class="btn btn-success" style="width:170px;">Tambah Mahasiswa</a>
+</div>           
 </div>    
 @if($message = Session::get('message'))
     <h1 class="text-center">{{$message}}</h1>
 @else
-<table class="table text-white" style="width:100%;">
-        <tr>
-        <th >No.</th>
-        <th >Nama Mahasiswa</th>        
-        <th >jenis Kelamin</th>
-        <th >NIM</th>
-        <th >Nama Dosen</th>
-        <th colspan="2">Aksi</th>
-    </tr>    
+<table class="table table-hover table-dark table-bordered mt-3">
+            <thead>
+                <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Nim</th>
+                <th class="text-center" scope="col">Jenis Kelamin</th>
+                <th class="text-center" scope="col">Dosen Wali</th>
+                <th class="text-center" scope="col">Actions</th>
+                </tr>
+            </thead>
     <?php $i=1;?>    
     @foreach($mahasiswa as $mhs)          
     <tr >
         <td class="cntr"><?php echo $i;?></td>
         <td >{{$mhs->nama}}</td>
-        <td class="cntr">{{$mhs->jenis_kelamin}}</td>        
-        <td >{{$mhs->nim}}</td>
+        <td class="cntr">{{$mhs->nim}}</td>        
+        <td >{{$mhs->jenis_kelamin}}</td>
         <td >{{$mhs->dosen->nama}}</td>
-        <td class="cntr">
-            <a class="edit" href="/edit/id={{$mhs->id}}">
-                <i class="fa fa-pencil" aria-hidden="true"></i>                            
-            </a>
+        <td class="text-center">
+        <a href="/edit/id={{$mhs->id}}" class="btn btn-primary badge-pill" style="width:80px;">Edit </a>
+        <a href="/hapus/id={{$mhs->id}}" class="btn btn-danger badge-pill" style="width:80px;">Hapus </a>
         </td>
-        <td class="cntr">
-            <a class="trash" href="/hapus/id={{$mhs->id}}">
-                <i class="fa fa-trash" aria-hidden="true"></i>                            
-            </a>
-        </td>     
     </tr>   
-        <?php ++$i;?>         
+        <?php ++$i;?>  
+        </div>
+</div>
+</div>       
     @endforeach
 @endif
 
